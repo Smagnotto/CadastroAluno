@@ -7,13 +7,14 @@ Estas instruções irão lhe ensinar como executar uma versão local para densen
 ### Pré-requisitos
 IDE Java (Eclipse, IntelliJ, etc.).
 
+
 ### Installing
 Copiar a versão mais recente do repositório:
 ```
-https://github.com/Smagnotto/BatchClientes
+https://github.com/Smagnotto/CadastroAluno
 ```
 
-Utilizar ela em usa IDE.
+Utilizar ela em sua IDE.
 
 ## Executando os testes
 
@@ -30,10 +31,10 @@ Além da inibição da opção ddl-auto do hibertane, pois não é ma boa práti
 
 
 ## Construído com
-
 * [Maven](https://maven.apache.org/) - Gerenciador de dependências
 * [Spring](https://spring.io) - Java Framework
 * [H2 Database Engine](https://www.h2database.com) - Banco de dados
+
 ## Autores
 Nome                  | RM
 --------------------- | ------
