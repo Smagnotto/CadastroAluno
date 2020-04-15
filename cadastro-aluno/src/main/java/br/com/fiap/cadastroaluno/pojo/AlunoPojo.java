@@ -3,9 +3,6 @@ package br.com.fiap.cadastroaluno.pojo;
 import br.com.fiap.cadastroaluno.domain.Aluno;
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * AlunoPojo
- */
 public class AlunoPojo {
 
     @ApiModelProperty(value="Id do aluno", readOnly = true)

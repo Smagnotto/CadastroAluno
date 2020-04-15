@@ -18,10 +18,15 @@ Utilizar ela em sua IDE.
 
 ## Executando os testes
 
-Utilizar os testes unitários já disponíveis com o código, ou utilizar a biblioteca do Postman dentro do projeto. 
+Utilizar os testes unitários já disponíveis com o código.  
 
+Para testes integrados, utilizar a biblioteca do Postman dentro do projeto:
 ```
 https://github.com/Smagnotto/CadastroAluno/tree/master/postman
+```
+Ou utilizar a interface do swagger:
+```
+http://localhost:8080/swagger-ui.html
 ```
 
 ## Implantação
