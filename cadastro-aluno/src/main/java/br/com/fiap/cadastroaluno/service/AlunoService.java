@@ -5,9 +5,6 @@ import java.util.List;
 import br.com.fiap.cadastroaluno.pojo.AlunoPojo;
 import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
 
-/**
- * AlunoService
- */
 public interface AlunoService {
 
      List<AlunoPojo> getAll();

@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class AlunoControllerTeste {
+public class CartaoControllerTeste {
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -37,9 +37,9 @@ public class AlunoControllerTeste {
 	private ObjectMapper mapper;
 
 	@MockBean
-	private AlunoService alunoService;
+	private TransacaoCartaoService cartaoService;
 
-	//listagem de alunos
+	//listagem de cartoes
 	@Test
 	public void getAllTeste() throws Exception {
 		

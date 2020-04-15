@@ -13,9 +13,6 @@ import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
 import br.com.fiap.cadastroaluno.repository.AlunoRepository;
 import br.com.fiap.cadastroaluno.service.AlunoService;
 
-/**
- * AlunoServiceImpl
- */
 @Service
 public class AlunoServiceImpl implements AlunoService {
 

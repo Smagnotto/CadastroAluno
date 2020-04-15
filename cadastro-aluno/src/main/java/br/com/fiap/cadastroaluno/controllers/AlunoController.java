@@ -22,24 +22,20 @@ import br.com.fiap.cadastroaluno.service.AlunoService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-/**
- * AlunoController
- */
-
 @RestController
 @RequestMapping("alunos")
 public class AlunoController {
 
-    private final AlunoService service;
+    private final AlunoService alunoService;
 
     public AlunoController(AlunoService service) {
-        this.service = service;
+        this.alunoService = service;
     }
     
     @ApiResponse(code = 200, message= "Retorna uma lista de alunos cadastrados")
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<AlunoPojo> getAll() {
-        return service.getAll();
+        return alunoService.getAll();
     }
 
     @ApiResponses(value = {
@@ -48,14 +44,14 @@ public class AlunoController {
     })
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public AlunoPojo getById(@PathVariable Long id) {
-        return service.findById(id);
+        return alunoService.findById(id);
     }
 
     @ApiResponse(code = 200, message = "Retorna o aluno criado")
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public AlunoPojo create(@RequestBody @Valid CreateAlunoPojo alunoPojo) {
-        return service.create(alunoPojo);
+        return alunoService.create(alunoPojo);
     }
 
     @ApiResponses(value = {
@@ -64,11 +60,11 @@ public class AlunoController {
     })
     @PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public AlunoPojo update(@PathVariable Long id, @RequestBody @Valid CreateAlunoPojo alunoPojo) {
-        return service.update(id, alunoPojo);
+        return alunoService.update(id, alunoPojo);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
-        service.delete(id);
+        alunoService.delete(id);
     }
 }
