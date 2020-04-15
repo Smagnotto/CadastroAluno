@@ -2,9 +2,6 @@ package br.com.fiap.cadastroaluno.pojo;
 
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * CreateAlunoPojo
- */
 public class CreateAlunoPojo {
 
     @ApiModelProperty(value = "Nome do aluno.", required = true, allowEmptyValue = false, dataType = "texto")

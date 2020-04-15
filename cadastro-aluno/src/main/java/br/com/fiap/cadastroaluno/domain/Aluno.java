@@ -1,16 +1,12 @@
 package br.com.fiap.cadastroaluno.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
@@ -31,11 +27,7 @@ public class Aluno {
 
     @Column(name = "cpf", nullable = false, length = 11)
     private String cpf;
-    
-	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<TransacaoCartao> transacaoCartao = new ArrayList<>();
-    
-	
+ 	
     public Aluno() { }
 
     public Aluno(CreateAlunoPojo aluno) {
@@ -56,8 +48,7 @@ public class Aluno {
         this.nome = aluno.getNome();
         this.sobrenome = aluno.getSobrenome();
         this.cpf = aluno.getCpf();
-        this.transacaoCartao = transacaoCartao;
-    }
+   }
 
     public long getId() {
         return id;
@@ -91,11 +82,4 @@ public class Aluno {
         this.cpf = cpf;
     }
     
-	public List<TransacaoCartao> getTransacaoCartao() {
-		return transacaoCartao;
-	}
-
-	public void setTransacaoCartao(List<TransacaoCartao> transacaoCartao) {
-		this.transacaoCartao = transacaoCartao;
-	}
 }
