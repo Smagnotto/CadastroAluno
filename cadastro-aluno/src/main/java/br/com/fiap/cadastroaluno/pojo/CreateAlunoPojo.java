@@ -7,11 +7,11 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class CreateAlunoPojo {
 
-    @ApiModelProperty(value = "Nome do aluno", required = true, allowEmptyValue = false, dataType = "texto")
+    @ApiModelProperty(value = "Nome do aluno.", required = true, allowEmptyValue = false, dataType = "texto")
     private String nome;
-    @ApiModelProperty(value = "Sobrenome do aluno", required = true, allowEmptyValue = false, dataType = "texto")
+    @ApiModelProperty(value = "Sobrenome do aluno.", required = true, allowEmptyValue = false, dataType = "texto")
     private String sobrenome;
-    @ApiModelProperty(value = "CPF do aluno", required = true, allowEmptyValue = false, dataType = "texto")
+    @ApiModelProperty(value = "CPF do aluno ex.: 12345678901", required = true, allowEmptyValue = false, dataType = "texto")
     private String cpf;
     
     public String getNome() {
