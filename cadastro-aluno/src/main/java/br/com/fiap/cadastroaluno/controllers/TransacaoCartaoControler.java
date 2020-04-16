@@ -38,6 +38,12 @@ public class TransacaoCartaoControler {
     public List<TransacaoCartaoPojo> getAll() {
         return service.getAll();
     }
+    
+    @ApiResponse(code = 200, message= "Retorna extrato de um aluno")
+    @GetMapping(path = "/extrato/{idAluno}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<TransacaoCartaoPojo> getByIdAluno(@PathVariable Long idAluno) {
+        return service.getByidAluno(idAluno);
+    }
 
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Retorna transacao"),

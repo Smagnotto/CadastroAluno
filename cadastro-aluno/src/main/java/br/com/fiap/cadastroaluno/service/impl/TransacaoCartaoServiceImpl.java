@@ -2,20 +2,13 @@ package br.com.fiap.cadastroaluno.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import br.com.fiap.cadastroaluno.domain.Aluno;
 import br.com.fiap.cadastroaluno.domain.TransacaoCartao;
-import br.com.fiap.cadastroaluno.pojo.AlunoPojo;
-import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
 import br.com.fiap.cadastroaluno.pojo.CreateTransacaoCartaoPojo;
 import br.com.fiap.cadastroaluno.pojo.TransacaoCartaoPojo;
-import br.com.fiap.cadastroaluno.repository.AlunoRepository;
 import br.com.fiap.cadastroaluno.repository.TransacaoCartaoRepository;
-import br.com.fiap.cadastroaluno.service.AlunoService;
 import br.com.fiap.cadastroaluno.service.TransacaoCartaoService;
 
 @Service
@@ -37,6 +30,14 @@ public class TransacaoCartaoServiceImpl implements TransacaoCartaoService {
     }
      
     @Override
+    public List<TransacaoCartaoPojo> getByidAluno(long idAluno) {
+        List<TransacaoCartao> transacaoCartao = repository.findByidAlunoOrderByDataDesc(idAluno);
+        return transacaoCartao.stream()
+                .map(TransacaoCartaoPojo::new)
+                .collect(Collectors.toList());
+    }
+    
+	@Override
     public TransacaoCartaoPojo findById(long id) {
     	TransacaoCartao transacaoCartao = getTransacaoCartaoById(id);
         return new TransacaoCartaoPojo(transacaoCartao);
@@ -56,8 +57,7 @@ public class TransacaoCartaoServiceImpl implements TransacaoCartaoService {
     	transacaoCartao.setData(transacaoCartaoPojo.getData());
     	transacaoCartao.setDescricao(transacaoCartaoPojo.getDescricao());
     	transacaoCartao.setValor(transacaoCartaoPojo.getValor());
-    	transacaoCartao.setAluno(transacaoCartaoPojo.getAluno());
-
+    	transacaoCartao.setIdAluno(transacaoCartaoPojo.getIdAluno());
         TransacaoCartao updatedTransacaoCartao = repository.save(transacaoCartao);
         return new TransacaoCartaoPojo(updatedTransacaoCartao);
     }

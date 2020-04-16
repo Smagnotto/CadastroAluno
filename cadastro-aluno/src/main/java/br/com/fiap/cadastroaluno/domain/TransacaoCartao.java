@@ -4,12 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.fiap.cadastroaluno.pojo.CreateTransacaoCartaoPojo;
@@ -21,9 +18,8 @@ public class TransacaoCartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aluno_id")
-	private Aluno aluno;
+	@Column(name = "idAluno")
+	private Long idAluno;
     
     @Column(name = "data", nullable = false)
     private Date data;
@@ -39,7 +35,7 @@ public class TransacaoCartao {
     public TransacaoCartao() {};
     
     public TransacaoCartao(CreateTransacaoCartaoPojo transacaoCartao) {
-    	this.aluno = transacaoCartao.getAluno();
+    	this.idAluno = transacaoCartao.getIdAluno();
 		this.data = transacaoCartao.getData();
 		this.descricao = transacaoCartao.getDescricao();
 		this.valor = transacaoCartao.getValor();
@@ -48,7 +44,7 @@ public class TransacaoCartao {
     
 	public TransacaoCartao(CreateTransacaoCartaoPojo transacaoCartao, long id) {
 		this.id = id;
-		this.aluno = transacaoCartao.getAluno();
+		this.idAluno = transacaoCartao.getIdAluno();
 		this.data = transacaoCartao.getData();
 		this.descricao = transacaoCartao.getDescricao();
 		this.valor = transacaoCartao.getValor();
@@ -62,12 +58,12 @@ public class TransacaoCartao {
 		this.id = id;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
+	public Long getIdAluno() {
+		return idAluno;
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setIdAluno(Long idAluno) {
+		this.idAluno = idAluno;
 	}
 
 	public Date getData() {

@@ -15,6 +15,7 @@ import br.com.fiap.cadastroaluno.domain.Aluno;
 import br.com.fiap.cadastroaluno.pojo.AlunoPojo;
 import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
 import br.com.fiap.cadastroaluno.service.AlunoService;
+import br.com.fiap.cadastroaluno.service.TransacaoCartaoService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,10 @@ public class AlunoControllerTeste {
 	@MockBean
 	private AlunoService alunoService;
 
+	@MockBean
+	private TransacaoCartaoService transacaoCartaoService;
+	
+	
 	//listagem de alunos
 	@Test
 	public void getAllTeste() throws Exception {
@@ -47,17 +52,15 @@ public class AlunoControllerTeste {
 		Aluno aluno1 = new Aluno();
 		AlunoPojo alunoP1 = new AlunoPojo(aluno1);
 		alunoP1.setId(1L);
-		alunoP1.setCpf("12345678911");
+		alunoP1.setIdAluno(333111L);
 		alunoP1.setNome("Nome1");
-		alunoP1.setSobrenome("Sobrenome1");
 
 		Aluno aluno2 = new Aluno();
 		AlunoPojo alunoP2 = new AlunoPojo(aluno2);
 		alunoP2.setId(2L);
-		alunoP2.setCpf("12345678922");
+		alunoP2.setIdAluno(333222L);
 		alunoP2.setNome("Nome2");
-		alunoP2.setSobrenome("Sobrenome2");
-		
+
 
 		List<AlunoPojo> alunos = Arrays.asList(alunoP1,alunoP2);
 		given(alunoService.getAll()).willReturn(alunos);
@@ -65,7 +68,7 @@ public class AlunoControllerTeste {
 		// when + then
 		this.mockMvc.perform(get("/alunos"))
 		.andExpect(status().isOk())
-		.andExpect(content().json("[{'id': 1,'nome': 'Nome1','sobrenome': 'Sobrenome1','cpf': '12345678911'},{'id': 2,'nome': 'Nome2','sobrenome': 'Sobrenome2','cpf': '12345678922'}]"));
+	    .andExpect(content().json("[{\"id\": 1, \"nome\": \"Nome1\", \"idAluno\": 333111 }, {\"id\": 2, \"nome\": \"Nome2\", \"idAluno\": 333222 } ]"));
 	}
 
 	//busca por Id
@@ -76,16 +79,16 @@ public class AlunoControllerTeste {
 		Aluno aluno1 = new Aluno();
 		AlunoPojo alunoP1 = new AlunoPojo(aluno1);
 		alunoP1.setId(1L);
-		alunoP1.setCpf("12345678911");
+		alunoP1.setIdAluno(333111L);
 		alunoP1.setNome("Nome1");
-		alunoP1.setSobrenome("Sobrenome1");
 
 		given(alunoService.findById(1L)).willReturn(alunoP1);
 
 		// when + then
 		this.mockMvc.perform(get("/alunos/1"))
 		.andExpect(status().isOk())
-		.andExpect(content().json("{'id': 1,'nome': 'Nome1','sobrenome': 'Sobrenome1','cpf': '12345678911'}"));
+	    .andExpect(content().json("{\"id\": 1, \"nome\": \"Nome1\", \"idAluno\": 333111 }"));
+
 	}
 
 	//criação de aluno
@@ -93,8 +96,7 @@ public class AlunoControllerTeste {
 	  public void createTeste() throws Exception {
 		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
 			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+			cAlunoP.setIdAluno(333111L);
 		  
 			String json;
 			try {
@@ -115,8 +117,7 @@ public class AlunoControllerTeste {
 	  public void updateTeste() throws Exception {
 		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
 			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+			cAlunoP.setIdAluno(333111);
 		  
 			String json;
 			try {
@@ -137,8 +138,7 @@ public class AlunoControllerTeste {
 	  public void deleteTeste() throws Exception {
 		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
 			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+			cAlunoP.setIdAluno(333111);
 		  
 
 			try {
@@ -150,4 +150,3 @@ public class AlunoControllerTeste {
 			}
 	  }
 }
-	
