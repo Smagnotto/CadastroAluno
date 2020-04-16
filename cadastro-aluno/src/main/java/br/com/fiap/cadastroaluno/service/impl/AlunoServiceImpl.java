@@ -49,8 +49,7 @@ public class AlunoServiceImpl implements AlunoService {
         Aluno aluno = getAlunoById(id);
 
         aluno.setNome(alunoPojo.getNome());
-        aluno.setSobrenome(alunoPojo.getSobrenome());
-        aluno.setCpf(alunoPojo.getCpf());
+        aluno.setIdAluno(alunoPojo.getIdAluno());
 
         Aluno updatedAluno = repository.save(aluno);
         return new AlunoPojo(updatedAluno);

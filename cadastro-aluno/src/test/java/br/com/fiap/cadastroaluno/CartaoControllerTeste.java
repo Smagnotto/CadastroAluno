@@ -1,5 +1,3 @@
-/*
-
 package br.com.fiap.cadastroaluno;
 
 import org.junit.Test;
@@ -17,11 +15,14 @@ import br.com.fiap.cadastroaluno.domain.Aluno;
 import br.com.fiap.cadastroaluno.domain.TransacaoCartao;
 import br.com.fiap.cadastroaluno.pojo.AlunoPojo;
 import br.com.fiap.cadastroaluno.pojo.CreateAlunoPojo;
+import br.com.fiap.cadastroaluno.pojo.CreateTransacaoCartaoPojo;
 import br.com.fiap.cadastroaluno.pojo.TransacaoCartaoPojo;
 import br.com.fiap.cadastroaluno.service.AlunoService;
 import br.com.fiap.cadastroaluno.service.TransacaoCartaoService;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
@@ -42,61 +43,89 @@ public class CartaoControllerTeste {
 	private ObjectMapper mapper;
 
 	@MockBean
-	private TransacaoCartaoService cartaoService;
+	private AlunoService alunoService;
+	
+	@MockBean
+	private TransacaoCartaoService transacaoCartaoService;
 
 	//listagem de transacoes de cartões
 	@Test
 	public void getAllTeste() throws Exception {
 		
+
+	
 		// given
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(120,03,15,15,41);
 		TransacaoCartao transacaoCartao1 = new TransacaoCartao();
 		TransacaoCartaoPojo transacaoCartaoP1 = new TransacaoCartaoPojo(transacaoCartao1);
 		transacaoCartaoP1.setId(1L);
-		transacaoCartaoP1.setData("2020-04-15");
-		transacaoCartaoP1.setNome("Nome1");
-		transacaoCartaoP1.setSobrenome("Sobrenome1");
+		transacaoCartaoP1.setData(data1);
+		transacaoCartaoP1.setDescricao("McDonalds1");
+		transacaoCartaoP1.setIdAluno(333111L);
+		transacaoCartaoP1.setValor(33.11);
 
-		List<AlunoPojo> alunos = Arrays.asList(alunoP1,alunoP2);
-		given(alunoService.getAll()).willReturn(alunos);
+		@SuppressWarnings("deprecation")
+		Date data2 = new Date(121,03,15,15,41);
+		
+		TransacaoCartao transacaoCartao2 = new TransacaoCartao();
+		TransacaoCartaoPojo transacaoCartaoP2 = new TransacaoCartaoPojo(transacaoCartao2);
+		transacaoCartaoP2.setId(2L);
+		transacaoCartaoP2.setData(data2);
+		transacaoCartaoP2.setDescricao("McDonalds2");
+		transacaoCartaoP2.setIdAluno(333222L);
+		transacaoCartaoP2.setValor(33.22);
+
+		
+		List<TransacaoCartaoPojo> transacaoCartoes = Arrays.asList(transacaoCartaoP1,transacaoCartaoP2);
+		given(transacaoCartaoService.getAll()).willReturn(transacaoCartoes);
 
 		// when + then
-		this.mockMvc.perform(get("/alunos"))
+		this.mockMvc.perform(get("/transacaocartoes"))
 		.andExpect(status().isOk())
-		.andExpect(content().json("[{'id': 1,'nome': 'Nome1','sobrenome': 'Sobrenome1','cpf': '12345678911'},{'id': 2,'nome': 'Nome2','sobrenome': 'Sobrenome2','cpf': '12345678922'}]"));
+	    .andExpect(content().json("[{\"id\":1,\"idAluno\":333111,\"data\":\"2020-04-15T18:41:00.000+0000\",\"descricao\":\"McDonalds1\",\"valor\":33.11},{\"id\":2,\"idAluno\":333222,\"data\":\"2021-04-15T18:41:00.000+0000\",\"descricao\":\"McDonalds2\",\"valor\":33.22}]"));
 	}
 
+	
 	//busca por Id
 	@Test
 	public void getByIdTeste() throws Exception {
 		
-		// given
-		Aluno aluno1 = new Aluno();
-		AlunoPojo alunoP1 = new AlunoPojo(aluno1);
-		alunoP1.setId(1L);
-		alunoP1.setCpf("12345678911");
-		alunoP1.setNome("Nome1");
-		alunoP1.setSobrenome("Sobrenome1");
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(120,03,15,15,41);
+		TransacaoCartao transacaoCartao1 = new TransacaoCartao();
+		TransacaoCartaoPojo transacaoCartaoP1 = new TransacaoCartaoPojo(transacaoCartao1);
+		transacaoCartaoP1.setId(1L);
+		transacaoCartaoP1.setData(data1);
+		transacaoCartaoP1.setDescricao("McDonalds1");
+		transacaoCartaoP1.setIdAluno(333111L);
+		transacaoCartaoP1.setValor(33.11);
 
-		given(alunoService.findById(1L)).willReturn(alunoP1);
+		given(transacaoCartaoService.findById(1L)).willReturn(transacaoCartaoP1);
 
 		// when + then
-		this.mockMvc.perform(get("/alunos/1"))
+		this.mockMvc.perform(get("/transacaocartoes/1"))
 		.andExpect(status().isOk())
-		.andExpect(content().json("{'id': 1,'nome': 'Nome1','sobrenome': 'Sobrenome1','cpf': '12345678911'}"));
+		.andExpect(content().json("{\"id\":1,\"idAluno\":333111,\"data\":\"2020-04-15T18:41:00.000+0000\",\"descricao\":\"McDonalds1\",\"valor\":33.11}"));
 	}
 
+	
 	//criação de aluno
 	  @Test
 	  public void createTeste() throws Exception {
-		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
-			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+		    CreateTransacaoCartaoPojo cTransacaoCartaoP = new CreateTransacaoCartaoPojo();
+		    @SuppressWarnings("deprecation")
+			Date data1 = new Date(120,03,15,15,41);
+		    cTransacaoCartaoP.setData(data1);
+		    cTransacaoCartaoP.setDescricao("MCDonalds1");
+		    cTransacaoCartaoP.setIdAluno(333111L);
+		    cTransacaoCartaoP.setValor(33.11);
+
 		  
 			String json;
 			try {
-				json = mapper.writeValueAsString(cAlunoP);
-				mockMvc.perform(post("/alunos")
+				json = mapper.writeValueAsString(cTransacaoCartaoP);
+				mockMvc.perform(post("/transacaocartoes")
 					      .contentType(MediaType.APPLICATION_JSON)
 					      .content(json)
 					      .accept(MediaType.APPLICATION_JSON))
@@ -110,15 +139,18 @@ public class CartaoControllerTeste {
 	  //atualização de aluno
 	  @Test
 	  public void updateTeste() throws Exception {
-		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
-			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+		    CreateTransacaoCartaoPojo cTransacaoCartaoP = new CreateTransacaoCartaoPojo();
+		    @SuppressWarnings("deprecation")
+			Date data1 = new Date(120,03,15,15,41);
+		    cTransacaoCartaoP.setData(data1);
+		    cTransacaoCartaoP.setDescricao("MCDonalds1");
+		    cTransacaoCartaoP.setIdAluno(333111L);
+		    cTransacaoCartaoP.setValor(33.11);
 		  
 			String json;
 			try {
-				json = mapper.writeValueAsString(cAlunoP);
-				mockMvc.perform(put("/alunos/1")
+				json = mapper.writeValueAsString(cTransacaoCartaoP);
+				mockMvc.perform(put("/transacaocartoes/1")
 					      .contentType(MediaType.APPLICATION_JSON)
 					      .content(json)
 					      .accept(MediaType.APPLICATION_JSON))
@@ -128,18 +160,21 @@ public class CartaoControllerTeste {
 				e.printStackTrace();
 			}
 	  }
-	
+
 	  //delecao de aluno
 	  @Test
 	  public void deleteTeste() throws Exception {
-		    CreateAlunoPojo cAlunoP = new CreateAlunoPojo();
-			cAlunoP.setNome("Nome1");
-			cAlunoP.setSobrenome("Sobrenome1");
-			cAlunoP.setCpf("12345678911");
+		    CreateTransacaoCartaoPojo cTransacaoCartaoP = new CreateTransacaoCartaoPojo();
+		    @SuppressWarnings("deprecation")
+			Date data1 = new Date(120,03,15,15,41);
+		    cTransacaoCartaoP.setData(data1);
+		    cTransacaoCartaoP.setDescricao("MCDonalds1");
+		    cTransacaoCartaoP.setIdAluno(333111L);
+		    cTransacaoCartaoP.setValor(33.11);
 		  
 
 			try {
-				mockMvc.perform(delete("/alunos/1"))
+				mockMvc.perform(delete("/transacaocartoes/1"))
 					      .andExpect(status().isOk());
 		
 			} catch (JsonProcessingException e) {
@@ -148,4 +183,3 @@ public class CartaoControllerTeste {
 	  }
 }
 	
-*/

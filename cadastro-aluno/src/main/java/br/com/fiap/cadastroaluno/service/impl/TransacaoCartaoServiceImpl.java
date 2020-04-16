@@ -2,11 +2,9 @@ package br.com.fiap.cadastroaluno.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import br.com.fiap.cadastroaluno.domain.TransacaoCartao;
 import br.com.fiap.cadastroaluno.pojo.CreateTransacaoCartaoPojo;
 import br.com.fiap.cadastroaluno.pojo.TransacaoCartaoPojo;
@@ -32,6 +30,14 @@ public class TransacaoCartaoServiceImpl implements TransacaoCartaoService {
     }
      
     @Override
+    public List<TransacaoCartaoPojo> getByidAluno(long idAluno) {
+        List<TransacaoCartao> transacaoCartao = repository.findByidAlunoOrderByDataDesc(idAluno);
+        return transacaoCartao.stream()
+                .map(TransacaoCartaoPojo::new)
+                .collect(Collectors.toList());
+    }
+    
+	@Override
     public TransacaoCartaoPojo findById(long id) {
     	TransacaoCartao transacaoCartao = getTransacaoCartaoById(id);
         return new TransacaoCartaoPojo(transacaoCartao);

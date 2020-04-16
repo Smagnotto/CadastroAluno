@@ -11,6 +11,7 @@ import br.com.fiap.cadastroaluno.pojo.TransacaoCartaoPojo;
 public interface TransacaoCartaoService {
 
      List<TransacaoCartaoPojo> getAll();
+     List<TransacaoCartaoPojo> getByidAluno(long idAluno);
      TransacaoCartaoPojo findById(long id);
      TransacaoCartaoPojo create(CreateTransacaoCartaoPojo transacaoCartao);
      TransacaoCartaoPojo update(Long id, CreateTransacaoCartaoPojo transacaoCartaoPojo);

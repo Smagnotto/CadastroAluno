@@ -9,41 +9,15 @@ public class AlunoPojo {
     private long id;
     @ApiModelProperty(value = "Nome do aluno", required = true, allowEmptyValue = false, dataType = "texto")
     private String nome;
-    @ApiModelProperty(value = "Sobrenome do aluno", required = true, allowEmptyValue = false, dataType = "texto")
-    private String sobrenome;
-    @ApiModelProperty(value = "CPF do aluno", required = true, allowEmptyValue = false, dataType = "texto")
-    private String cpf;
+    @ApiModelProperty(value = "Id Aluno", required = true, allowEmptyValue = false, dataType = "long")
+    private long idAluno;
     
     public AlunoPojo(Aluno aluno) {
         this.id = aluno.getId();
         this.nome = aluno.getNome();
-        this.sobrenome = aluno.getSobrenome();
-        this.cpf = aluno.getCpf();
+        this.idAluno = aluno.getIdAluno();
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
     public long getId() {
         return id;
@@ -52,4 +26,21 @@ public class AlunoPojo {
     public void setId(long id) {
         this.id = id;
     }
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+	public long getIdAluno() {
+		return idAluno;
+	}
+
+	public void setIdAluno(long idAluno) {
+		this.idAluno = idAluno;
+	}
+
 }

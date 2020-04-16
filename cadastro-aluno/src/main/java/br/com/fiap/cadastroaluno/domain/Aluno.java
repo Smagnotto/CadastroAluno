@@ -22,33 +22,23 @@ public class Aluno {
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @Column(name = "sobrenome", nullable = false, length = 50)
-    private String sobrenome;
-
-    @Column(name = "cpf", nullable = false, length = 11)
-    private String cpf;
+    @Column(name = "idAluno", nullable = false, length = 11)
+    private long idAluno;
  	
     public Aluno() { }
 
     public Aluno(CreateAlunoPojo aluno) {
         this.nome = aluno.getNome();
-        this.sobrenome = aluno.getSobrenome();
-        this.cpf = aluno.getCpf();
+        this.idAluno = aluno.getIdAluno();
+
     }
 
     public Aluno(CreateAlunoPojo aluno, Long id) {
         this.id  = id;
         this.nome = aluno.getNome();
-        this.sobrenome = aluno.getSobrenome();
-        this.cpf = aluno.getCpf();
-    }
+        this.idAluno = aluno.getIdAluno();
 
-    public Aluno(CreateAlunoPojo aluno, Long id,List<TransacaoCartao> transacaoCartao) {
-        this.id  = id;
-        this.nome = aluno.getNome();
-        this.sobrenome = aluno.getSobrenome();
-        this.cpf = aluno.getCpf();
-   }
+    }
 
     public long getId() {
         return id;
@@ -66,20 +56,11 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
+	public long getIdAluno() {
+		return idAluno;
+	}
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    
+	public void setIdAluno(long idAluno) {
+		this.idAluno = idAluno;
+	}
 }

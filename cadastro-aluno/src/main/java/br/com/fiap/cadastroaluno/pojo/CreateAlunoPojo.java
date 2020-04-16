@@ -6,10 +6,8 @@ public class CreateAlunoPojo {
 
     @ApiModelProperty(value = "Nome do aluno.", required = true, allowEmptyValue = false, dataType = "texto")
     private String nome;
-    @ApiModelProperty(value = "Sobrenome do aluno.", required = true, allowEmptyValue = false, dataType = "texto")
-    private String sobrenome;
-    @ApiModelProperty(value = "CPF do aluno ex.: 12345678901", required = true, allowEmptyValue = false, dataType = "texto")
-    private String cpf;
+    @ApiModelProperty(value = "Id do aluno", required = true, allowEmptyValue = false, dataType = "long")
+    private long idAluno;
     
     public String getNome() {
         return nome;
@@ -19,19 +17,13 @@ public class CreateAlunoPojo {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
+	public long getIdAluno() {
+		return idAluno;
+	}
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
+	public void setIdAluno(long idAluno) {
+		this.idAluno = idAluno;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 }
